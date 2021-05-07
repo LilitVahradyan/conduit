@@ -1,0 +1,53 @@
+<div class="sign-in">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-xs-12">
+              <h1 class="text-center">Sign up</h1>
+              <p class="text-center">
+                <a href="#" (click)="goToSignIn()">Have an account?</a>
+              </p>
+                <form class="sign-in-form" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group" 
+                         [ngClass]="{'has-error': username?.invalid && username?.touched}">
+                        <input type="username" class="form-control"  placeholder="Username" formControlName="username" >
+                        <p *ngIf="username?.touched && 
+                                  username?.invalid && 
+                                  username?.errors?.required">
+                          Username is required!
+                        </p>
+                        <p *ngIf="username?.errors?.minlength">
+                         Username must be at least 8 characters long.
+                        </p> 
+                      </div>
+                    <div class="form-group" 
+                        [ngClass]="{'has-error': email?.invalid && email?.touched}">
+                      <input type="email" class="form-control"  placeholder="Email" formControlName="email">
+                      <p *ngIf="email?.invalid && 
+                                email?.touched && 
+                                email?.errors?.required">
+                        Email is required!
+                      </p>
+                      <p *ngIf="email?.errors?.email">
+                        Email is not correct!
+                      </p>
+                    </div>
+                    <div class="form-group" 
+                         [ngClass]="{'has-error': pass?.invalid &&  pass?.touched}">
+                      <input type="password" class="form-control"  placeholder="Password" formControlName="password" name="password">
+                      <p *ngIf="pass?.invalid &&  
+                                pass?.touched &&
+                                pass?.errors?.required">
+                        Password is required!
+                      </p>
+                      <p *ngIf="pass?.errors?.pattern">
+                        Password must be at least 8 characters long and contain one uppercase letter, 
+                        one lowercase letter and one number.
+                       </p> 
+                    </div>
+                    <button type="submit" class="btn  float-right" [disabled]="!signUpForm.valid" >Sing up</button>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+ 

@@ -1,0 +1,30 @@
+footer{
+    background: #f3f3f3;
+    margin-top: 3rem;
+    padding: 1rem 0;
+    bottom: 0;
+}
+
+.logo{
+    font-family: titillium web,sans-serif;
+    color: #5cb85c;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1em;
+    margin-right: 15px;
+    line-height: 1;
+}
+footer .copy-text{
+    vertical-align: middle;
+    margin-left: 10px;
+    font-size: .8rem;
+    color: #bbb;
+    font-weight: 300;
+    line-height: 1;
+}
+
+footer .copy-text a{
+    color: #5cb85c;
+    text-decoration: none;
+}
+    

@@ -1,0 +1,32 @@
+<div class="sign-in">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-xs-12">
+              <h1 class="text-center">Sign in</h1>
+              <p class="text-center">
+                <a href="#" (click)="goToSignUp()">Need an account?</a>
+              </p>
+              <form class="sign-in-form" (ngSubmit)="submitForm()" #form="ngForm">
+                  <div class="form-group">
+                      <input type="email" class="form-control"  placeholder="Email" name="email" #email="ngModel"
+                              ngModel email required>
+                      <p *ngIf="email.invalid && email.touched && form.controls.email?.errors?.required">Email is required!</p>
+                      <p *ngIf="email.invalid && email.touched && form.controls.email?.errors?.email">Email is not correct!</p>
+                  </div>
+                  <div class="form-group">
+                    <input type="password" class="form-control"  placeholder="Password" name="password" #password="ngModel"
+                             ngModel required  pattern="{{passwordPattern}}">
+                      <p *ngIf="password.invalid && password.touched && 
+                                form.controls.password?.errors?.required">Password is required!</p>
+                      <p *ngIf="form.controls.password?.errors?.pattern">
+                        Password must be at least 8 characters long and contain one uppercase letter, 
+                        one lowercase letter and one number.
+                      </p>
+                    </div>
+                    <button type="submit" class="btn float-right" [disabled]="!form.valid">Sing in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
