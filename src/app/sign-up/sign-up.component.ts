@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { SignUpModel } from '../models/sign-up-model';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,38 +11,41 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 export class SignUpComponent implements OnInit {
 
-  @Output() haveAccount = new EventEmitter;
+ constructor(private authSrv: AuthService){}
+
+ signUpForm!: any;  // type ???
+                          
+  ngOnInit(){
+    this.signUpForm = new FormGroup({
+      username: new FormControl('dfgdfgdgfdg', [Validators.required, Validators.minLength(8)]),
+      email: new FormControl('fgdg@gmail.com', [Validators.required, Validators.email]),
+      password: new FormControl('rferftreLfer5646', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")])
+    })
+   
+  };
+  
+  @Output() haveAccount: EventEmitter<boolean> = new EventEmitter();
   
   goToSignIn(){
     this.haveAccount.emit()
   };
-
- signUpForm!: FormGroup; // Aranc ! error -- Property 'signUpForm' has no initializer and is not definitely assigned in the constructor.
-                          
-  ngOnInit(){
-    this.signUpForm = new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")])
-    })
-   
-  };
-
+  
   onSubmit(){
-   //console.log('form', this.signUpForm);
+    this.authSrv.signUp(this.signUpForm.getRawValue())
+      .subscribe(
+        (response) =>{
+        console.log(this.signUpForm.getRawValue());
+        console.log(response);
+        
+      },
+        (error) => {
+        console.log(this.signUpForm.getRawValue());
+        console.log(error);
+      })
+      
     
   }
   
-   get pass(){
-     return this.signUpForm.get('password');
-   }
-   get username(){
-     return this.signUpForm.get('username');
-   }
-   get email(){
-    return this.signUpForm.get('email');
-  }
-   
-   
+  
 }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
@@ -9,17 +9,24 @@ import { NgForm } from '@angular/forms';
 
 export class SignInComponent implements OnInit {
 
-  @Output() needAccount = new EventEmitter;
+  constructor(private fb: FormBuilder) { }
+  
+  signInForm!: FormGroup;
 
-  constructor() { }
-  passwordPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$";
+  ngOnInit(): void {
+    this.signInForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")]]
+    })
+  }
+  
+  @Output() needAccount: EventEmitter<boolean> = new EventEmitter();
 
   goToSignUp(){
     this.needAccount.emit()
   }
 
-  ngOnInit(): void {
-  }
+  
 
   submitForm(){
 
