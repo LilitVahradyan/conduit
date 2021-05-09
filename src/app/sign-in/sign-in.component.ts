@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -9,10 +9,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class SignInComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+      private fb: FormBuilder,
+      private authSrv: AuthService
+   ) { }
   
   signInForm!: FormGroup;
-
+  infoMessage: string = '';
+  errorMessage: string = '';
+  
   ngOnInit(): void {
     this.signInForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -26,12 +31,17 @@ export class SignInComponent implements OnInit {
     this.needAccount.emit()
   }
 
-  
-
-  submitForm(){
-
+  signIn(){
+    this.authSrv.signIn({user: this.signInForm.getRawValue()})
+    .subscribe(
+      (response) =>{
+      this.infoMessage = 'You are successfully Signed In!';
+    },
+      (error) => {
+      this.errorMessage = 'Invalid Credentials!';
+      
+    })
   }
   
   
 }
-

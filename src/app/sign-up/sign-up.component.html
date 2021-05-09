@@ -6,6 +6,13 @@
               <p class="text-center">
                 <a href="#" (click)="goToSignIn()">Have an account?</a>
               </p>
+              <div class="infoMsg msg" *ngIf="infoMessage.length > 0">
+                <p>{{infoMessage }}</p>
+              </div>
+              <div class="errorMsg msg" *ngIf="errorMessage.length > 0">
+                <p>{{errorMessage }}</p>
+              </div>
+              
                 <form class="sign-in-form" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
                     <div class="form-group" 
                          [ngClass]="{'has-error': signUpForm.get('username')?.invalid && signUpForm.get('username')?.touched}">
@@ -44,7 +51,7 @@
                         one lowercase letter and one number.
                        </p> 
                     </div>
-                    <button type="submit" class="btn  float-right"  >Sing up</button>
+                    <button type="submit" class="btn  float-right"  [disabled]="!signUpForm.valid">Sing up</button>
                   </form>
             </div>
         </div>

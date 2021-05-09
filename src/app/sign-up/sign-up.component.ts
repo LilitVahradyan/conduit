@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { SignUpModel } from '../models/sign-up-model';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -13,13 +13,15 @@ export class SignUpComponent implements OnInit {
 
  constructor(private authSrv: AuthService){}
 
- signUpForm!: any;  // type ???
-                          
+ signUpForm!: FormGroup;  
+ infoMessage: string = '';
+ errorMessage: string = '';
+
   ngOnInit(){
     this.signUpForm = new FormGroup({
-      username: new FormControl('dfgdfgdgfdg', [Validators.required, Validators.minLength(8)]),
-      email: new FormControl('fgdg@gmail.com', [Validators.required, Validators.email]),
-      password: new FormControl('rferftreLfer5646', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")])
+      username: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")])
     })
    
   };
@@ -31,20 +33,20 @@ export class SignUpComponent implements OnInit {
   };
   
   onSubmit(){
-    this.authSrv.signUp(this.signUpForm.getRawValue())
+    this.authSrv.signUp({user: this.signUpForm.getRawValue()})
       .subscribe(
         (response) =>{
-        console.log(this.signUpForm.getRawValue());
-        console.log(response);
-        
+        this.infoMessage = 'You are successfully Signed Up!';
       },
         (error) => {
-        console.log(this.signUpForm.getRawValue());
-        console.log(error);
+        this.errorMessage = 'Invalid Credentials!';
+        
       })
       
     
   }
+
+  
   
   
 }
