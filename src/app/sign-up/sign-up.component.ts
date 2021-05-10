@@ -15,13 +15,13 @@ export class SignUpComponent implements OnInit {
 
  signUpForm!: FormGroup;  
  infoMessage: string = '';
- errorMessage: string = '';
+ errorMessages: string[] = [];
 
   ngOnInit(){
     this.signUpForm = new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")])
+      username: new FormControl('lilit123', [Validators.required, Validators.minLength(8)]),
+      email: new FormControl('lilit95v@gmail.com', [Validators.required, Validators.email]),
+      password: new FormControl('Lilit123456', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")])
     })
    
   };
@@ -33,14 +33,24 @@ export class SignUpComponent implements OnInit {
   };
   
   onSubmit(){
-    this.authSrv.signUp({user: this.signUpForm.getRawValue()})
+    this.authSrv.signUp(this.signUpForm.getRawValue())
       .subscribe(
         (response) =>{
         this.infoMessage = 'You are successfully Signed Up!';
-      },
-        (error) => {
-        this.errorMessage = 'Invalid Credentials!';
+        console.log(response);
         
+      },
+        (err) => {
+         const e = err.error.errors;
+          Object.keys(e).forEach(item => {
+            const itemErrors = e[item];
+          
+            itemErrors.forEach((eachErr: any) => {
+              this.errorMessages.push(`${item} ${eachErr}`)
+            })
+            
+          })
+          
       })
       
     

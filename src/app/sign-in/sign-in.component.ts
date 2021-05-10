@@ -16,7 +16,7 @@ export class SignInComponent implements OnInit {
   
   signInForm!: FormGroup;
   infoMessage: string = '';
-  errorMessage: string = '';
+  errorMessages: string[] = [];
   
   ngOnInit(): void {
     this.signInForm = this.fb.group({
@@ -32,16 +32,21 @@ export class SignInComponent implements OnInit {
   }
 
   signIn(){
-    this.authSrv.signIn({user: this.signInForm.getRawValue()})
+    this.authSrv.signIn(this.signInForm.getRawValue())
     .subscribe(
       (response) =>{
       this.infoMessage = 'You are successfully Signed In!';
+      console.log(response);
     },
-      (error) => {
-      this.errorMessage = 'Invalid Credentials!';
-      
+    (err) => {
+      const e = err.error.errors;
+       Object.keys(e).forEach(item => {
+         const itemErrors = e[item];
+       
+         itemErrors.forEach((eachErr: any) => {
+           this.errorMessages.push(`${item} ${eachErr}`)
+         })
     })
-  }
-  
-  
+  })
+}
 }

@@ -12,14 +12,13 @@ export class AuthService{
 
     constructor(private http: HttpClient){}
 
-    signUpUrl: string = 'https://conduit.productionready.io/api/users';
-    signInUrl: string = 'https://conduit.productionready.io/api/users/login';
-
     signUp(data: SignUpModel){
-        return this.http.post(this.signUpUrl, data)
+        const signUpUrl = 'https://conduit.productionready.io/api/users';
+        return this.http.post(signUpUrl, {user: data})
     }
 
     signIn(data: SignInModel){
-        return this.http.post(this.signInUrl, data)
+        const signInUrl = 'https://conduit.productionready.io/api/users/login';
+        return this.http.post(signInUrl, {user: data})
     }
 }

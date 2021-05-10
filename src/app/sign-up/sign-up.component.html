@@ -6,11 +6,11 @@
               <p class="text-center">
                 <a href="#" (click)="goToSignIn()">Have an account?</a>
               </p>
-              <div class="infoMsg msg" *ngIf="infoMessage.length > 0">
+              <div class="infoMsg msg px-4" *ngIf="infoMessage.length > 0">
                 <p>{{infoMessage }}</p>
               </div>
-              <div class="errorMsg msg" *ngIf="errorMessage.length > 0">
-                <p>{{errorMessage }}</p>
+              <div class="errorMsg msg px-4" *ngFor="let error of errorMessages">
+                <p>{{error}}</p>
               </div>
               
                 <form class="sign-in-form" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
