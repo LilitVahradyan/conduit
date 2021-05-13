@@ -1,6 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute} from '@angular/router';
+
 import { AuthService } from '../services/auth.service';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -11,7 +14,9 @@ export class SignInComponent implements OnInit {
 
   constructor(
       private fb: FormBuilder,
-      private authSrv: AuthService
+      private authSrv: AuthService,
+      private router: Router,
+      private route: ActivatedRoute
    ) { }
   
   signInForm!: FormGroup;
@@ -24,11 +29,9 @@ export class SignInComponent implements OnInit {
       password: ['', [Validators.required, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")]]
     })
   }
-  
-  @Output() needAccount: EventEmitter<boolean> = new EventEmitter();
 
-  goToSignUp(){
-    this.needAccount.emit()
+  onOpenSignUp(){
+    this.router.navigate(['/register'], {relativeTo: this.route})
   }
 
   signIn(){

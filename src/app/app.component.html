@@ -1,9 +1,5 @@
 <app-header></app-header>
-<ng-container *ngIf="hasAccount">
-    <app-sign-in (needAccount)="onClickLink()"></app-sign-in>
-</ng-container>
-<ng-container *ngIf="!hasAccount">
-    <app-sign-up (haveAccount)="onClickLink()"></app-sign-up>
-</ng-container>
+
+<router-outlet></router-outlet>
 
 <app-footer></app-footer>

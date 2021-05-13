@@ -46,3 +46,7 @@
     background-color: #CCFFCC
     
 }
+a:hover{
+    cursor: pointer;
+    text-decoration: underline !important;
+}

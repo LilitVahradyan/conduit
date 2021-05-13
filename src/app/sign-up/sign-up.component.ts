@@ -1,5 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { AuthService } from '../services/auth.service';
 
 
@@ -11,7 +13,11 @@ import { AuthService } from '../services/auth.service';
 
 export class SignUpComponent implements OnInit {
 
- constructor(private authSrv: AuthService){}
+ constructor(
+  private authSrv: AuthService,
+  private router: Router,
+  private route: ActivatedRoute
+ ){}
 
  signUpForm!: FormGroup;  
  infoMessage: string = '';
@@ -25,13 +31,11 @@ export class SignUpComponent implements OnInit {
     })
    
   };
-  
-  @Output() haveAccount: EventEmitter<boolean> = new EventEmitter();
-  
-  goToSignIn(){
-    this.haveAccount.emit()
+
+  onOpenSignIn(){
+    this.router.navigate(['/login'], {relativeTo: this.route})
   };
-  
+
   onSubmit(){
     this.authSrv.signUp(this.signUpForm.getRawValue())
       .subscribe(

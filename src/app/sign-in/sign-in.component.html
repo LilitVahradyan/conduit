@@ -4,7 +4,7 @@
             <div class="col-md-6 offset-md-3 col-xs-12">
               <h1 class="text-center">Sign in</h1>
               <p class="text-center">
-                <a href="#" (click)="goToSignUp()">Need an account?</a>
+                <a (click)="onOpenSignUp()">Need an account?</a>
               </p>
               <div class="infoMsg msg px-4" *ngIf="infoMessage.length > 0 && errorMessages.length === 0">
                 <p>{{infoMessage }}</p>

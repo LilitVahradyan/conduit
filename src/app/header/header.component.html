@@ -9,9 +9,10 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
               <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#">Sign-in</a>
-                <a class="nav-item nav-link" href="#">Sign-up</a>
+                <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" 
+                  [routerLinkActiveOptions]="{exact: true}">Home </a>
+                <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active">Sign-in</a>
+                <a class="nav-item nav-link" routerLink="/register" routerLinkActive="active">Sign-up</a>
               </div>
             </div>
           </nav>
