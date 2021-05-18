@@ -19,6 +19,7 @@ export class SignUpComponent implements OnInit {
   private route: ActivatedRoute
  ){}
 
+ hide: boolean = true;
  signUpForm!: FormGroup;  
  infoMessage: string = '';
  errorMessages: string[] = [];

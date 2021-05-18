@@ -5,26 +5,6 @@
 .sign-in .container p{
     font-family: source sans pro,sans-serif;
 }
-.sign-in .container p>a{
-    color: #5cb85c
-}
-.sign-in .sign-in-form input,
-.sign-in .sign-in-form button{
-    padding: .75rem 1.5rem;
-    font-size: 1.25rem;
-    border-radius: .3rem;
-}
-.sign-in .sign-in-form button{
-    color: #fff;
-    background-color: #5cb85c;
-    border-color: #5cb85c;
-}
-.has-error input{
-    border: 1px solid red
-}    
-.form-group p{
-    color: red
-}
 .msg{
     border-radius: 5px;
     margin-bottom: 15px;
@@ -46,7 +26,6 @@
     background-color: #CCFFCC
     
 }
-a:hover{
-    cursor: pointer;
-    text-decoration: underline !important;
+.mat-form-field{
+    display: block
 }

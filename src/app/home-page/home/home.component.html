@@ -1,0 +1,62 @@
+<div class="home-page">
+    <div class="banner">
+        <div class="container">
+            <h1 class="logo">coundit</h1>
+            <p>A place to share your knowledge.</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <mat-tab-group animationDuration="2000ms">
+                    <mat-tab label="First">Content 1</mat-tab>
+                    <mat-tab label="Global Feed">
+                        <article  *ngFor="let feed of feedsList">
+                            <div class="article">
+                                <div class="article-metta">
+                                    <a mat-button href=""> 
+                                        <img src="{{feed.author.image}}" alt="">
+                                    </a>
+                                    <div class="info">
+                                        <a  mat-button href="">
+                                            {{feed.author.username}}
+                                        </a>
+                                        <span class="date">
+                                            {{feed.createdAt | date: 'mediumDate' }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>{{feed.title}}</p>
+                        </article>
+                        <pagination [boundaryLinks]="true" [maxSize]="10"
+                        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+                        </pagination>
+                    </mat-tab>
+                   
+                  </mat-tab-group>
+                 
+            </div>
+            <div class="col-md-3">
+                <div class="sidebar">
+                    <p>Popular Tags</p>
+                    <div class="tag-list d-flex flex-wrap">
+                        <mat-chip-list
+                            class="example-chip m-1"
+                            cdkDropList 
+                            cdkDropListOrientation="horizontal" *ngFor="let tag of tagsList">
+                            <!-- (cdkDropListDropped)="drop($event)"> -->
+                            <mat-chip
+                                class="example-box"
+                                cdkDrag>
+                                <!-- *ngFor="let vegetable of vegetables"> -->
+                                {{tag}}
+                            </mat-chip>
+                            </mat-chip-list>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

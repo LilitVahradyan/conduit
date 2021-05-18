@@ -1,0 +1,62 @@
+.home-page .banner {
+    background: #3f51b5;
+    box-shadow: inset 0 8px 8px -8px rgb(0 0 0 / 30%), inset 0 -8px 8px -8px rgb(0 0 0 / 30%);
+}
+.banner {
+    color: #fff;
+    padding: 3rem;
+    margin-bottom: 2rem;
+}
+.home-page .banner .logo {
+    text-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+    font-weight: 700;
+    text-align: center;
+    font-size: 3rem;
+    padding-bottom: .5rem;
+    font-family: titillium web,sans-serif;
+}
+.home-page .banner p {
+    color: #fff;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 300!important;
+    margin-bottom: 0;
+    font-family: titillium web,sans-serif;
+}
+.home-page .sidebar {
+    padding: 5px 10px 10px;
+    background: #f3f3f3;
+    border-radius: 4px;
+}
+.home-page .sidebar p {
+    margin-bottom: .2rem;
+}
+.home-page .article {
+    border-top: 1px solid rgba(0,0,0,.1);
+    padding: 1.5rem 0;
+}
+
+.home-page .article .article-metta {
+    display: block;
+    position: relative;
+    font-weight: 300;
+    margin: 0 0 1rem;
+}
+.home-page .article .info {
+    margin: 0 1.5rem 0 .3rem;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1rem;
+}
+.home-page .article .date {
+    color: #bbb;
+    font-size: .8rem;
+    display: block;
+}
+.article-metta img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 32px;
+    width: 32px;
+    border-radius: 30px;
+}

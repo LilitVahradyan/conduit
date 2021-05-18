@@ -19,6 +19,7 @@ export class SignInComponent implements OnInit {
       private route: ActivatedRoute
    ) { }
   
+  hide: boolean = true;
   signInForm!: FormGroup;
   infoMessage: string = '';
   errorMessages: string[] = [];
@@ -53,3 +54,4 @@ export class SignInComponent implements OnInit {
   })
 }
 }
+export class FormFieldAppearanceExample {}

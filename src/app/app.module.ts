@@ -1,38 +1,27 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { HomeComponent } from './home/home.component';
+
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
-import { PasswordValidationDirective } from './directives/password-validation.directive';
-
-
+import { AppComponent } from './app.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    SignInComponent,
-    SignUpComponent,
-    PasswordValidationDirective,
-    HomeComponent,
     NotFoundPageComponent
   ],
+
   imports: [
+    AuthModule,
     BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule
-    
-    
+    AppRoutingModule
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

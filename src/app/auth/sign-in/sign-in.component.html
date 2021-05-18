@@ -1,0 +1,47 @@
+<div class="sign-in">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-xs-12">
+              <h1 class="text-center">Sign in</h1>
+              <p class="text-center">
+                <a mat-button color="primary" (click)="onOpenSignUp()">Need an account?</a>
+              </p>
+              <div class="infoMsg msg px-4" *ngIf="infoMessage.length > 0 && errorMessages.length === 0">
+                <p>{{infoMessage }}</p>
+              </div>
+                <div class="errorMsg msg px-4" *ngFor="let error of errorMessages">
+                  <p>{{error}}</p>
+                </div>
+                <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+                  <mat-form-field appearance="outline" >
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="email">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-error *ngIf="signInForm.get('email')?.invalid && 
+                    signInForm.get('email')?.touched && 
+                    signInForm.get('email')?.hasError('required')">Email is required!</mat-error>
+                    <mat-error *ngIf="signInForm.get('email')?.hasError('email')">
+                      Email is not correct!
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                      <mat-label>Password</mat-label>
+                      <input matInput  [type]="hide ? 'password' : 'text'"  placeholder="Placeholder" formControlName="password">
+                      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                      <mat-error *ngIf="signInForm.get('password')?.invalid && 
+                      signInForm.get('password')?.touched &&
+                      signInForm.get('password')?.hasError('required')">
+                           Password is required!</mat-error>
+                      <mat-error *ngIf="signInForm.get('password')?.hasError('pattern')">
+                        Password must be at least 8 characters long and contain one uppercase letter, 
+                        one lowercase letter and one number.
+                      </mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" class="float-right" [disabled]="!signInForm.valid">Sign in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
