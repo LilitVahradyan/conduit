@@ -14,8 +14,9 @@ export class FeedsService {
         private http: HttpClient,
     ) { }
 
-    getFeeds(){
+    getFeeds(query: {limit: number,  offset: number}){
         const url = 'https://conduit.productionready.io/api/articles';
-        return this.http.get<FeedModel[]>(url)
+        return this.http.get<{articlesCount: number, articles: FeedModel[]}>
+                    (url,  {params: query as any})
     }
 }

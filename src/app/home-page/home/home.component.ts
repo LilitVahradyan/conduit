@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FeedsService } from '../services/feeds.service';
 import { TagsService } from '../services/tags.service';
 import { FeedModel } from '../models/feeds.model';
+import { TagsModel } from '../models/tags.model';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +12,12 @@ import { FeedModel } from '../models/feeds.model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  tagsList: any;
+  tagsList!: TagsModel[];
   feedsList!: FeedModel[];
+
+  feedsCount: number = 0;
+  itemsPerPage: number =  10;
+  pageNumber: number = 1;
 
   constructor(
     private tagsSrv: TagsService,
@@ -19,31 +25,39 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getTags();
+    this.getFeeds();
+  
+  }
+
+  getTags(){
     this.tagsSrv.getTags()
       .subscribe(
         (response) => {
-          Object.values(response).forEach((tag) => this.tagsList = tag);
+          this.tagsList = response.tags
         }
       )
-
-      this.feedsSrv.getFeeds()
-        .subscribe(
-          (response) => {
-            console.log(response);
-            
-            Object.values(response).forEach((feed) => {
-              if(Array.isArray(feed)){
-                this.feedsList = feed;
-                console.log(this.feedsList)
-              }
-            })
-          },
-          (error) => {
-            console.log(error);
-            
-          }
-        )
-
+  }
+  
+  getFeeds(){
+    this.feedsSrv.getFeeds({
+      limit: this.itemsPerPage,
+      offset: (this.pageNumber * this.itemsPerPage) - this.itemsPerPage
+    })
+    .subscribe(
+      (response) => {
+        this.feedsList = response.articles;
+        this.feedsCount = response.articlesCount;
+        
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 
+  onPageChanged(event: PageChangedEvent){
+    this.pageNumber = event.page;
+    this.getFeeds()   
+  }
 }

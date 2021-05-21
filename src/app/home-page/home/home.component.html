@@ -29,8 +29,10 @@
                             </div>
                             <p>{{feed.title}}</p>
                         </article>
-                        <pagination [boundaryLinks]="true" [maxSize]="10"
-                        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+                        <pagination [totalItems]="feedsCount" 
+                                    [itemsPerPage]="itemsPerPage" 
+                                    [maxSize]="5"
+                                    (pageChanged)="onPageChanged($event)">
                         </pagination>
                     </mat-tab>
                    
